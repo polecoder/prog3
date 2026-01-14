@@ -77,7 +77,7 @@ Consideremos algunas ideas básicas que motivan el algoritmo:
 
 - Cuando se inicia, todos están solteros. Supongamos que un hombre soltero $m$ elige a la mujer $w$, quién está en lo más alto de su lista de preferencias y se le propone. Con esto, no necesariamente podemos concluir que $(m,w)$ será uno de los pares de nuestro emparejamiento final, pues puede pasar que en el futuro un hombre $m'$ al cual $w$ prefiere se le proponga. Por otro lado, puede ser peligroso para $w$ rechazar a $m$, ya que tal vez nunca reciba una propuesta de alguien que esté más arriba de $m$ en la lista de sus preferencias. Entonces una idea natural, sería que el par $(m,w)$ entre en un estado intermedio de **compromiso**.
 
-    ![Figura 1](./img/clase1fig1.png)
+    ![Figura 1](../img/clase1fig1.png)
 
 - Supongamos que ahora estamos en un estado en el cual tenemos algunos hombres y mujeres están solteros/as y algunos de ellos están **comprometidos**. El siguiente paso, podría ser el descrito a continuación. Un hombre soltero $m$ (cualquiera) elige a la mujer que más prefiere, a la cual todavía no se le ha propuesto, y se le propone, llamemos $w$ a esta mujer. Si la mujer $w$ también está soltera, entonces se **comprometen** . Si la mujer no está soltera, entonces está comprometida con otro hombre $m'$. Entonces en este caso, ella determina a quién de los dos hombres $m$ y $m'$ prefiere según su lista de preferencias; el elegido, se compromete con ella, y el otro se vuelve soltero.
 - Finalmente, el algoritmo termina cuando no hay nadie que esté soltero, aquí todos los emparejamientos se declaran como definitivos y se devuelve el resultado como un emparejamiento perfecto.
@@ -93,18 +93,16 @@ every woman
         to whom m has not yet proposed
     If w is free then
         (m, w) become engaged
-    Else w is currently engaged to m
-        If w prefers m to m then
+    Else w is currently engaged to m'
+        If w prefers m' to m then
             m remains free
-        Else w prefers m to m
+        Else w prefers m to m'
             (m, w) become engaged
-            m becomes free
+            m' becomes free
         Endif
     Endif
 Endwhile
 Return the set S of engaged pairs
 ```
 
-
 Algo interesante del algoritmo es que, por más fácil de entender o escribir que sea el algorítmo, no es inmediatamente obvio que devuelve un emparejamiento estable. De hecho ni siquiera es fácil de ver que retorna un emparejamiento perfecto. Probaremos esto en la clase siguiente.
-
