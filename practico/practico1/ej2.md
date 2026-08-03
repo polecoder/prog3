@@ -1,9 +1,8 @@
-## Ejercicio 02 - Emparejamiento estable
+# Emparejamiento estable
 
 **Fecha:** 28-11-2025
-**Estado:** 🟢 Resuelto solo
 
-### Consigna
+## Consigna
 
 Considere una instancia del problema de emparejamiento estable entre los conjuntos:
 
@@ -13,19 +12,25 @@ Considere una instancia del problema de emparejamiento estable entre los conjunt
 con listas de preferencias dadas por las tablas mostradas a continuación. 
 A modo de ejemplo, $m_1$ prefiere en primer lugar a $w_1$, mientras que para $w_1$ la mejor opción es $m_4$.
 
-|     | 1° | 2° | 3° | 4° |
-|-----|----|----|----|----|
-| $m_1$ | $w_1$ | $w_2$ | $w_3$ | $w_4$ |
-| $m_2$ | $w_1$ | $w_4$ | $w_3$ | $w_2$ |
-| $m_3$ | $w_2$ | $w_1$ | $w_3$ | $w_4$ |
-| $m_4$ | $w_4$ | $w_2$ | $w_3$ | $w_1$ |
+$$
+\begin{array}{c|cccc}
+&1&2&3&4\\
+m_1&w_1&w_2&w_3&w_4\\
+m_2&w_1&w_4&w_3&w_2\\
+m_3&w_2&w_1&w_3&w_4\\
+m_4&w_4&w_2&w_3&w_1\\
+\end{array}
+$$
 
-|     | 1° | 2° | 3° | 4° |
-|-----|----|----|----|----|
-| $w_1$ | $m_4$ | $m_3$ | $m_1$ | $m_2$ |
-| $w_2$ | $m_2$ | $m_4$ | $m_1$ | $m_3$ |
-| $w_3$ | $m_4$ | $m_1$ | $m_2$ | $m_3$ |
-| $w_4$ | $m_3$ | $m_2$ | $m_1$ | $m_4$ |
+$$
+\begin{array}{c|cccc}
+&1&2&3&4\\
+w_1&m_4&m_3&m_1&m_2\\
+w_2&m_2&m_4&m_1&m_3\\
+w_3&m_4&m_1&m_2&m_3\\
+w_4&m_3&m_2&m_1&m_4\\
+\end{array}
+$$
 
 1. Presente una **sucesión de formaciones y separaciones de parejas** que se realizan a lo largo de una ejecución del algoritmo de **Gale–Shapley**.
 
@@ -39,71 +44,71 @@ Muestre que, en esta instancia, para toda persona se verifica que:
 
 4. Concluya que para esta instancia del problema existe **una única solución**.
 
-### Resolución
+## Resolución
 
-#### Parte 1
+### Parte 1
 
 - Presente una **sucesión de formaciones y separaciones de parejas** que se realizan a lo largo de una ejecución del algoritmo de **Gale–Shapley**.
 
 Veamos iteración por iteración el estado del conjunto $S$ que será devuelto como resultado.
 
-##### Iteración 1
+#### Iteración 1
 
 **Conjunto $S$:** $\{(m_1,w_1)\}$
 **Pareja propuesta:** $(m_1,w_1)$
 **Pareja formada:** $(m_1,w_1)$
 **Pareja rechazada:** Ninguna
 
-##### Iteración 2
+#### Iteración 2
 
 **Conjunto $S$:** $\{(m_1,w_1)\}$
 **Pareja propuesta:** $(m_2,w_1)$
 **Pareja formada:** Ninguna
 **Pareja rechazada:** $(m_2,w_1)$
 
-##### Iteración 3
+#### Iteración 3
 
 **Conjunto $S$:** $\{(m_1,w_1),(m_2,w_4)\}$
 **Pareja propuesta:** $(m_2,w_4)$
 **Pareja formada:** $(m_2,w_4)$
 **Pareja rechazada:** Ninguna
 
-##### Iteración 4
+#### Iteración 4
 
 **Conjunto $S$:** $\{(m_1,w_1),(m_2,w_4),(m_3,w_2)\}$
 **Pareja propuesta:** $(m_3,w_2)$
 **Pareja formada:** $(m_3,w_2)$
 **Pareja rechazada:** Ninguna
 
-##### Iteración 5
+#### Iteración 5
 
 **Conjunto $S$:** $\{(m_1,w_1),(m_2,w_4),(m_3,w_2)\}$
 **Pareja propuesta:** $(m_4,w_4)$
 **Pareja formada:** Ninguna
 **Pareja rechazada:** $(m_4,w_4)$
 
-##### Iteración 6
+#### Iteración 6
 
 **Conjunto $S$:** $\{(m_1,w_1),(m_2,w_4),(m_4,w_2)\}$
 **Pareja propuesta:** $(m_4,w_2)$
 **Pareja formada:** $(m_4,w_2)$
 **Pareja rechazada:** $(m_3,w_2)$
 
-##### Iteración 7
+#### Iteración 7
 
 **Conjunto $S$:** $\{(m_3,w_1),(m_2,w_4),(m_4,w_2)\}$
 **Pareja propuesta:** $(m_3,w_1)$
 **Pareja formada:** $(m_3,w_1)$
 **Pareja rechazada:** $(m_1,w_1)$
 
-##### Iteración 8
+#### Iteración 8
 
 **Conjunto $S$:** $\{(m_3,w_1),(m_2,w_4),(m_4,w_2)\}$
 **Pareja propuesta:** $(m_1,w_2)$
 **Pareja formada:** Ninguna
 **Pareja rechazada:** $(m_1,w_2)$
 
-##### Iteración 9
+#### Iteración 9
 
 **Conjunto $S$:** $\{(m_3,w_1),(m_2,w_4),(m_4,w_2), (m_1,w_3)\}$
 **Pareja propuesta:** $(m_1,w_3)$
@@ -112,62 +117,62 @@ Veamos iteración por iteración el estado del conjunto $S$ que será devuelto c
 
 A este punto ya tenemos formado el emparejamiento estable que buscabamos.
 
-#### Parte 2
+### Parte 2
 
 - Repita la parte 1 **invirtiendo los roles** de $M$ y $W$.
 
 Veamos iteración por iteración el estado del conjunto $S$ que será devuelto como resultado al proponer la mujer en vez del hombre.
 
-##### Iteración 1
+#### Iteración 1
 
 **Conjunto $S$:** $\{(w_1,m_4)\}$
 **Pareja propuesta:** $(w_1,m_4)$
 **Pareja formada:** $(w_1,m_4)$
 **Pareja rechazada:** Ninguna
 
-##### Iteración 2
+#### Iteración 2
 
 **Conjunto $S$:** $\{(w_1,m_4),(w_2,m_2)\}$
 **Pareja propuesta:** $(w_2,m_2)$
 **Pareja formada:** $(w_2,m_2)$
 **Pareja rechazada:** Ninguna
 
-##### Iteración 3
+#### Iteración 3
 
 **Conjunto $S$:** $\{(w_2,m_2),(w_3,m_4)\}$
 **Pareja propuesta:** $(w_3,m_4)$
 **Pareja formada:** $(w_3,m_4)$
 **Pareja rechazada:** $(w_1,m_4)$
 
-##### Iteración 4
+#### Iteración 4
 
 **Conjunto $S$:** $\{(w_2,m_2),(w_3,m_4),(w_1,m_3)\}$
 **Pareja propuesta:** $(w_1,m_3)$
 **Pareja formada:** $(w_1,m_3)$
 **Pareja rechazada:** Ninguna
 
-##### Iteración 5
+#### Iteración 5
 
 **Conjunto $S$:** $\{(w_2,m_2),(w_3,m_4),(w_1,m_3)\}$
 **Pareja propuesta:** $(w_4,m_3)$
 **Pareja formada:** Ninguna
 **Pareja rechazada:** $(w_4,m_3)$
 
-##### Iteración 6
+#### Iteración 6
 
 **Conjunto $S$:** $\{(w_3,m_4),(w_1,m_3),(w_4,m_2)\}$
 **Pareja propuesta:** $(w_4,m_2)$
 **Pareja formada:** $(w_4,m_2)$
 **Pareja rechazada:** $(w_2,m_2)$
 
-##### Iteración 7
+#### Iteración 7
 
 **Conjunto $S$:** $\{(w_1,m_3),(w_4,m_2),(w_2,m_4)\}$
 **Pareja propuesta:** $(w_2,m_4)$
 **Pareja formada:** $(w_2,m_4)$
 **Pareja rechazada:** $(w_3,m_4)$
 
-##### Iteración 8
+#### Iteración 8
 
 **Conjunto $S$:** $\{(w_1,m_3),(w_4,m_2),(w_2,m_4),(w_3,m_1)\}$
 **Pareja propuesta:** $(w_3,m_1)$
@@ -176,7 +181,7 @@ Veamos iteración por iteración el estado del conjunto $S$ que será devuelto c
 
 A este punto ya tenemos formado el emparejamiento estable que buscabamos.
 
-#### Parte 3
+### Parte 3
 
 - Note que el emparejamiento estable formado en las partes anteriores es el mismo (a menos del orden en que se listan las parejas).  
 Muestre que, en esta instancia, para toda persona se verifica que:
@@ -214,7 +219,7 @@ Por lo tanto, tenemos que:
 
 Es decir, para toda persona, se verifica que **su mejor pareja válida** coincide con su **peor pareja válida**. $\blacksquare$
 
-#### Parte 4
+### Parte 4
 
 - Concluya que para esta instancia del problema existe **una única solución**.
 
