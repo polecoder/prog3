@@ -1,25 +1,14 @@
-# Clase 02 - Emparejamiento estable
+# Emparejamiento estable
 
 **Fecha:** 2025-11-26
-**Estado:** 🟢 Completado
 
-## Resumen en 3 líneas
+## Emparejamiento estable
 
-
-
-## Preguntas Clave
-
-
-
-## Contenido
-
-### Emparejamiento estable
-
-#### Analizando el algoritmo
+### Analizando el algoritmo
 
 A continuación, intentaremos responder a algunas de las preguntas que nos hicimos en la clase anterior, y otras posibles preguntas que podrían habernos surgido analizando el algoritmo.
 
-Consideremos inicialmente el punto de vista de una mejor, durante la ejecución del algoritmo. En un principio, nadie se le ha propuesto, por lo que está soltera. Entonces un hombre puede proponerle matrimonio, resultando en que ella quede comprometida. A medida que pasa el tiempo, ella puede recibir propuestas adicionales, aceptando aquellas que vienen de un hombre con mayor preferencia que el actual. De esto obtenemos que:
+Consideremos inicialmente el punto de vista de una mujer, durante la ejecución del algoritmo. En un principio, nadie se le ha propuesto, por lo que está soltera. Entonces un hombre puede proponerle matrimonio, resultando en que ella quede comprometida. A medida que pasa el tiempo, ella puede recibir propuestas adicionales, aceptando aquellas que vienen de un hombre con mayor preferencia que el actual. De esto obtenemos que:
 
 - **(1.1) $w$ permanece comprometida desde el momento en que recibe su primera propuesta; y la secuencia de parejas irá mejorando en términos de sus preferencias.**
 
@@ -34,17 +23,18 @@ Ahora demostraremos que el algoritmo termina, dando un límite del número máxi
 **Demostración:**
 
 Buscaremos una forma precisa de mostrar que cada paso del algoritmo lo lleva más cerca de su finalización como método para determinar el máximo límite de tiempo de ejecución del mismo.
-Notemos que en el algoritmo, cada iteración consiste en que un hombre se le propone, una única vez, a una mujer que nunca se le ha propuesto. Entonces si llamamos $P(t)$ al par $(m,w)$ tal que $m$ se le propone a $w$ en la iteración $t$, tendremos que para todo $t$ se cumplirá que el tamaño de $P(t+1)$ es estrictamente mayor que el de $P(t)$ (esto porque en toda iteración se hace exactamente una propuesta), esto nos permite concluir que el algoritmo se acerca hacia la condición de fin en cada iteración.
+Notemos que en el algoritmo, cada iteración consiste en que un hombre se le propone, una única vez, a una mujer que nunca se le ha propuesto. Entonces si llamamos $P(t)$ al conjunto de pares $(m,w)$ tal que $m$ se le propone a $w$ en alguna iteración igual o anterior a la iteración $t$; tendremos que para todo $t$ se cumplirá que el tamaño de $P(t+1)$ es estrictamente mayor que el de $P(t)$ (esto porque en toda iteración se hace exactamente una propuesta), esto nos permite concluir que el algoritmo se acerca hacia la condición de fin en cada iteración.
 Por otra parte, la máxima cantidad posible de pares de hombres y mujeres es $n\times n$, por lo tanto el tamaño de $P(\cdot)$ puede aumentar como mucho hasta $n^2$.
 Por lo tanto podemos concluir que el algoritmo finaliza con un máximo de $n^2$ iteraciones. $\blacksquare$
 
-Ahora querremos verificar que el emparejamiento devuelto por el algoritmo es efectivamente un emparejamiento estable. Para esto necesitamos varios pasos previos, siendo el primero probar que un hombre no puede salir del final de su lista de preferencias (pues quedaría soltero y el algoritmo no terminaría).
+Ahora querremos verificar que el emparejamiento devuelto por el algoritmo es efectivamente un emparejamiento estable. Para demostrar esto necesitamos varios pasos previos; siendo el primero probar que un hombre no puede salir del final de su lista de preferencias (pues quedaría soltero y el algoritmo no terminaría).
 
 - **(1.4) Si $m$ está soltero en algún punto de la ejecución del algoritmo, entonces hay una mujer a la que aún no se le ha propuesto.**
 
 **Demostración:**
 
-Supongamos que se llega al punto en que $m$ está soltero, pero ya se le propuso a todas las mujeres. Entonces por el punto (1.1), cada una de las $n$ mujeres está comprometida en este momento. Dado que el conjunto de los pares comprometidos forma un emparejamiento, también debe haber $n$ hombres comprometidos. Pero el total de hombres es $n$, por lo tanto no puede pasar que $m$ no esté comprometido.
+Supongamos que se llega al punto en que $m$ está soltero, pero ya se le propuso a todas las $n$ mujeres. Entonces por el punto (1.1), cada una de las $n$ mujeres está comprometida en este momento.
+Dado que el conjunto de los pares comprometidos forma un emparejamiento, también debe haber $n$ hombres comprometidos. Pero el total de hombres es $n$, por lo tanto no puede pasar que $m$ no esté comprometido.
 Como llegamos a una contradicción, la suposición que hicimos inicialmente fue absurda. $\blacksquare$
 
 - **(1.5) Al finalizar la ejecución, el emparejamiento obtenido es perfecto.**
@@ -75,7 +65,7 @@ Por el orden de ejecución del algoritmo, necesariamente la última propuesta qu
 
 Como los dos casos contradicen alguna de las hipótesis, concluimos que $S$ es un emparejamiento estable. $\blacksquare$
 
-#### Extensiones del análisis
+### Extensiones del análisis
 
 Hay algunas cuestiones más que vamos a investigar más profundamente.
 Una de ellas, es que dado el diseño actual del algoritmo, termina siendo "injusto" hacia el conjunto al que se le proponen (en nuestro caso las mujeres). Consideremos el caso donde ninguna de las preferencias de los hombre se solapan en el primer lugar, entonces para este caso todos los hombres terminarían en pareja con la mujer que más prefieren, mientras que las preferencias de las mujeres no serían tomadas en cuenta.
